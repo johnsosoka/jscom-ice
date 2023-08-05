@@ -1,3 +1,12 @@
+Gemfile
+Gemfile.lock
+_config.yml
+_data
+_site
+blog
+notes
+pages
+
 *.gem
 *.rbc
 /.config
@@ -14,6 +23,7 @@
 .DS_Store
 # Used by dotenv library to load environment variables.
 # .env
+
 
 # Ignore Byebug command history file.
 .byebug_history
