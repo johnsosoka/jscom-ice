@@ -7,9 +7,19 @@ theme, please fork the repository and make any changes you would like.
 
 ## Usage
 
-1. Download the gem from github
-2. manually install the gem `$ gem install ./jscom-ice-0.0.1.gem`
-
+1. Add to gemfile: 
+    ```
+   group :jekyll_plugins do
+    # jscom theme
+    gem "jscom_ice", '~> 0.0.3'
+    
+    end
+   ```
+2. Add to _config.yml:
+    ```
+    theme: jscom_ice
+    ```
+   
 ## Release
 
 Releasing requires a rubygems account with access to the jscom-ice gem.
