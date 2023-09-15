@@ -27,5 +27,5 @@ Releasing requires a rubygems account with access to the jscom-ice gem.
 1. Make changes to the theme
 2. Adjust version in the gemspec
 3. build the gem `gem build jscom_ice_theme.gemspec`
-4. Push the gem to rubygems `gem push jscom-ice-0.0.1.gem` (be sure to update the version number)
+4. Push the gem to rubygems `gem push jscom_ice-0.0.1.gem` (be sure to update the version number)
 
