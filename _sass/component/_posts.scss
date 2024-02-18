@@ -41,7 +41,6 @@
 .col-md-2 {
   flex: 1; // or a fixed width if you want the date to have a specific width
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
