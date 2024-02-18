@@ -1,3 +1,10 @@
+---
+title: Tags
+permalink: /tags/
+layout: page
+excerpt: Sorted article by tags.
+---
+
 <div class="archive-tags">
     <a class="tag-item" href="#">all</a>
     {%- for tag in site.tags -%}
@@ -5,8 +12,6 @@
     <a class="tag-item" href="#{{name}}">{{ name }}</a>
     {%- endfor -%}
 </div>
-
-<!-- TODO Dates / Titles aren't aligned -->
 
 {%- for tag in site.tags -%}
 {%- capture name -%}{{ tag | first }}{%- endcapture -%}

@@ -1,6 +1,6 @@
 .posts-wrapper {
   background-color: transparent;
-  padding: 10px;
+  padding: 5px;
 
   .posts-item-note {
     color: $dark-text-link-blue;
@@ -9,6 +9,8 @@
 
   .post-item {
     border-top: transparent;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   // last post item won't have a border
@@ -21,6 +23,7 @@
     display: block;
     color: $dark-white;
     font-weight: bold;
+    white-space: nowrap;
   }
 
   .post-item-title a {
@@ -34,3 +37,15 @@
 }
 
 
+
+.col-md-2 {
+  flex: 1; // or a fixed width if you want the date to have a specific width
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.col-md-8 {
+  flex: 5; // allows the title to grow and take up remaining space
+  //overflow: hidden;
+  padding-left: 10px; // adjust as necessary for spacing
+}
