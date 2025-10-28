@@ -1,9 +1,83 @@
-
+// Contact form specific styling
 #contactMeForm {
+  max-width: 800px;
+  margin: $spacing-xxl auto;
 
-  .btn {
+  // Button container for stacked buttons
+  .form-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-top: $spacing-md;
 
-    width: 100%;
+    .btn {
+      width: 100%;
+    }
   }
 
+  // Legacy single button support
+  .btn:not(.form-buttons .btn) {
+    width: 100%;
+    margin-top: $spacing-md;
+  }
+
+  // Add extra polish to the form container
+  .form-control {
+    &:last-of-type {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  // Force textarea to match dark theme (override Bootstrap)
+  textarea.form-control,
+  textarea {
+    background-color: rgba(27, 29, 37, 0.8) !important;
+    color: $dark-white !important;
+    border: 1px solid rgba(138, 168, 255, 0.2) !important;
+
+    &::placeholder {
+      color: $darker-white !important;
+      opacity: 0.6 !important;
+    }
+
+    &:focus {
+      background-color: rgba(27, 29, 37, 0.95) !important;
+      border-color: $darker-text-link-blue !important;
+      color: $dark-white !important;
+    }
+
+    &:hover:not(:focus) {
+      background-color: rgba(27, 29, 37, 0.9) !important;
+    }
+  }
+
+  // Force input text colors too (in case Bootstrap overrides)
+  input.form-control {
+    color: $dark-white !important;
+
+    &::placeholder {
+      color: $darker-white !important;
+      opacity: 0.6 !important;
+    }
+  }
+
+  // Success/error message styling
+  .alert {
+    margin-top: $spacing-lg;
+    padding: $spacing-md;
+    border-radius: 8px;
+    font-weight: $medium-weight;
+
+    &.alert-success {
+      background-color: rgba(111, 191, 115, 0.2);
+      border: 1px solid rgba(111, 191, 115, 0.4);
+      color: lighten($accent-green, 20%);
+    }
+
+    &.alert-danger {
+      background-color: rgba(251, 73, 52, 0.2);
+      border: 1px solid rgba(251, 73, 52, 0.4);
+      color: lighten(#fb4934, 20%);
+    }
+  }
 }

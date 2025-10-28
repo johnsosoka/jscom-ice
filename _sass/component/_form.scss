@@ -1,42 +1,154 @@
+// Modern form styling matching our design language
 form {
   margin: 0 auto;
   width: 100%;
-  padding: 1em;
-  border: 1px solid #CCC;
-  border-radius: 1em;
+  padding: $spacing-xl;
+  border: 1px solid rgba(138, 168, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(27, 29, 37, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .form-control {
-  margin-bottom: 10px;
+  margin-bottom: $spacing-lg;
 }
 
 label {
-  display: inline-block;
-  width: 90px;
-  text-align: right;
+  display: block;
+  margin-bottom: $spacing-sm;
+  color: $dark-white;
+  font-weight: $medium-weight;
+  font-size: $medium-font-size;
 }
 
-input,
-textarea {
-  font: 1em sans-serif;
-  width: 300px;
+// Input and textarea base styling
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+textarea,
+select {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  width: 100%;
+  padding: $spacing-md;
   box-sizing: border-box;
-  border: 1px solid #999;
-}
 
-input:focus,
-textarea:focus {
-  border-color: #000;
+  // Modern dark theme input styling
+  background-color: rgba(27, 29, 37, 0.8);
+  border: 1px solid rgba(138, 168, 255, 0.2);
+  border-radius: 8px;
+  color: $dark-white;
+
+  // Smooth transitions
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+  // Placeholder styling
+  &::placeholder {
+    color: $darker-white;
+    opacity: 0.6;
+  }
+
+  // Focus state
+  &:focus {
+    outline: none;
+    border-color: $darker-text-link-blue;
+    background-color: rgba(27, 29, 37, 0.95);
+    box-shadow: 0 0 0 3px rgba(138, 168, 255, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  // Hover state
+  &:hover:not(:focus) {
+    border-color: rgba(138, 168, 255, 0.3);
+    background-color: rgba(27, 29, 37, 0.9);
+  }
 }
 
 textarea {
   vertical-align: top;
-  height: 5em;
+  min-height: 120px;
+  resize: vertical;
+  line-height: $base-line-height;
+
+  // Ensure background matches other inputs
+  background-color: rgba(27, 29, 37, 0.8);
+
+  // Fix placeholder alignment to match other inputs
+  &::placeholder {
+    padding-top: 0;
+    line-height: $base-line-height;
+  }
 }
 
-.button {
-  padding-left: 90px;
-}
+// Button styling
+.btn,
+button[type="submit"],
+input[type="submit"] {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $semibold-weight;
+  padding: $spacing-md $spacing-xl;
 
+  background: linear-gradient(135deg, $darker-text-link-blue 0%, $accent-blue 100%);
+  border: 1px solid rgba(138, 168, 255, 0.3);
+  border-radius: 8px;
+  color: $dark-white;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  box-shadow: 0 2px 8px rgba(138, 168, 255, 0.2);
+
+  &:hover {
+    background: linear-gradient(135deg, $link-hover-blue 0%, lighten($accent-blue, 5%) 100%);
+    box-shadow: 0 4px 16px rgba(138, 168, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(138, 168, 255, 0.3);
+  }
+
+  &:focus {
+    outline: 2px solid $link-hover-blue;
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  // Secondary button variant (for reset/clear actions)
+  &.btn-secondary {
+    background: linear-gradient(135deg, rgba(251, 73, 52, 0.3) 0%, rgba(251, 73, 52, 0.2) 100%);
+    border: 1px solid rgba(251, 73, 52, 0.4);
+    color: lighten(#fb4934, 25%);
+    font-weight: $medium-weight;
+
+    &:hover {
+      background: linear-gradient(135deg, rgba(251, 73, 52, 0.4) 0%, rgba(251, 73, 52, 0.3) 100%);
+      box-shadow: 0 4px 16px rgba(251, 73, 52, 0.3);
+      color: lighten(#fb4934, 30%);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(251, 73, 52, 0.2);
+    }
+
+    &:focus {
+      outline: 2px solid rgba(251, 73, 52, 0.5);
+      outline-offset: 2px;
+    }
+  }
+}
 
 
