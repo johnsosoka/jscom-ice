@@ -1,52 +1,77 @@
 .posts-wrapper {
   background-color: transparent;
-  padding: 5px;
+  padding: $spacing-sm;
 
   .posts-item-note {
     color: $dark-text-link-blue;
-    font-size: 25px;
+    font-size: $xlarge-font-size;
+    font-weight: $semibold-weight;
+    margin-bottom: $spacing-lg;
   }
 
   .post-item {
     border-top: transparent;
     white-space: normal;
     overflow-wrap: break-word;
+    padding: $spacing-md $spacing-sm;
+    border-radius: 6px;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      background-color: rgba(138, 168, 255, 0.04);
+      transform: translateX(4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
   }
 
   // last post item won't have a border
   .post-item:not(:last-child) {
-    border-bottom: 1px solid $dark-light;
-    margin-bottom: 1px;
+    border-bottom: 1px solid rgba(74, 77, 86, 0.5);
+    margin-bottom: $spacing-xs;
   }
 
   span.post-item-date {
     display: block;
     color: $dark-white;
-    font-weight: bold;
+    font-weight: $medium-weight;
+    font-size: $medium-font-size;
     white-space: nowrap;
+    opacity: 0.8;
+    font-family: $code-font-family;
+    letter-spacing: 0.5px;
   }
 
-  .post-item-title a {
-    color: $smoke;
-    //font-weight: bold;
-    transition: color 0.2s ease;
-  }
+  .post-item-title {
+    a {
+      color: $smoke;
+      font-weight: $medium-weight;
+      font-size: $base-font-size;
+      line-height: $heading-line-height;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      text-decoration: none;
 
-  .post-item-title a:hover {
-    color: $darker-blue-grey;
+      &:hover {
+        color: $link-hover-blue;
+        text-shadow: 0 0 8px rgba(164, 192, 255, 0.2);
+      }
+
+      &:active, &:focus {
+        color: $link-active-blue;
+      }
+    }
   }
 }
 
 
 
 .col-md-2 {
-  flex: 1; // or a fixed width if you want the date to have a specific width
+  flex: 1; // fixed width for date column
   white-space: nowrap;
   text-overflow: ellipsis;
+  min-width: 120px;
 }
 
 .col-md-8 {
   flex: 5; // allows the title to grow and take up remaining space
-  //overflow: hidden;
-  padding-left: 10px; // adjust as necessary for spacing
+  padding-left: $spacing-md;
 }

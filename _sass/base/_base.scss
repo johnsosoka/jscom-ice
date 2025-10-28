@@ -90,11 +90,16 @@ ol {
 }
 
 body {
-  // Universal Font to Reduce Footprint
-  font-family: Arial, sans-serif;
+  // Modern, readable font stack
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  font-weight: $normal-weight;
+
   // make text easier on the eyes
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   -webkit-font-feature-settings: "kern" 1;
   -moz-font-feature-settings: "kern" 1;
   -o-font-feature-settings: "kern" 1;
@@ -119,19 +124,50 @@ body {
   background-color: $dark-black;
 
 
-  // Universal Headers
+  // Universal Headers with improved hierarchy
   h1, h2, h3, h4, h5, h6 {
     color: $smoke;
-    font-weight: bold;
+    font-weight: $semibold-weight;
+    line-height: $heading-line-height;
+    margin-top: $spacing-lg;
+    margin-bottom: $spacing-md;
+  }
+
+  h1 {
+    font-size: $xxlarge-font-size;
+    font-weight: $bold-weight;
+  }
+
+  h2 {
+    font-size: $xlarge-font-size;
+  }
+
+  h3 {
+    font-size: $large-font-size;
   }
 
 
   /** for `code tags` **/
   code {
+    font-family: $code-font-family;
+    font-size: $medium-font-size;
     color: #2881d3;
     // code highlight color
     &.highlighter-rouge {
       background-color: $dark-light;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+  }
+
+  // Code blocks (preformatted)
+  pre {
+    font-family: $code-font-family;
+    font-size: $medium-font-size;
+    line-height: 1.5;
+
+    code {
+      font-family: inherit;
     }
   }
 
@@ -155,15 +191,28 @@ body {
   }
 
   a {
-    // Link Colors
+    // Link Colors with smooth transitions
     color: $darker-text-link-blue;
-    transition: color 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+    transition: color 0.3s ease, opacity 0.2s ease, text-shadow 0.3s ease;
 
-    &:hover,
+    &:hover {
+      // On Hover - Lighter and more vibrant
+      color: $link-hover-blue;
+      text-shadow: 0 0 8px rgba(164, 192, 255, 0.3);
+    }
+
     &:active,
     &:focus {
-      // On Hover Color
-      color: $darker-blue-grey;
+      // On Active/Focus - Slightly different shade
+      color: $link-active-blue;
+      outline: 2px solid $link-hover-blue;
+      outline-offset: 2px;
+    }
+
+    &:focus {
+      // Better keyboard navigation visibility
+      outline-style: dashed;
     }
   }
 }

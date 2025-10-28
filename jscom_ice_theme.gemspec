@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "jscom_ice"
-  spec.version       = "0.0.8"
+  spec.version       = "0.0.9"
   spec.authors       = ["John Sosoka"]
   spec.email         = ["code@johnsosoka.com"]
 
@@ -13,8 +13,8 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{assets,_includes,_layouts,_sass}/**/*"] + ["LICENSE", "README.md"]
 
   # Dependencies
-  spec.add_runtime_dependency "jekyll", "~> 4.3.2"
-  spec.add_runtime_dependency "jekyll-feed", "~> 0.13"
-  spec.add_runtime_dependency "jekyll-sitemap", "~> 1.4.0"
-  spec.add_runtime_dependency "jekyll-compose", "~> 0.12.0"
+  spec.add_runtime_dependency "jekyll", "~> 4.3"
+  spec.add_runtime_dependency "jekyll-feed", "~> 0.17"
+  spec.add_runtime_dependency "jekyll-sitemap", "~> 1.4"
+  spec.add_runtime_dependency "jekyll-compose", "~> 0.12"
 end

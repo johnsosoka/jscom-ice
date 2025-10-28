@@ -1,4 +1,4 @@
-// Navbar
+// Navbar with enhanced styling
 .navbar {
   border-color: $dark-light;
   // position: relative; // Removed - let Bootstrap's fixed-top handle positioning
@@ -6,29 +6,41 @@
   margin-right: auto;
   margin-left: auto;
   border-bottom: 1px solid $dark-smoke;
+  padding: $spacing-md $spacing-lg;
 
   // Smooth transitions for all state changes
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease, backdrop-filter 0.3s ease;
 
   // Scrolled state - solid background with shadow
   &.navbar-scrolled {
-    background-color: rgba(33, 37, 41, 0.98) !important; // Dark semi-transparent
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(19, 20, 24, 0.95) !important; // Match $dark-black with transparency
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(138, 168, 255, 0.15); // Subtle link color accent
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    padding: $spacing-sm $spacing-lg;
   }
 
   .nav-link:not(:last-child) {
-    //font-size: 18px;
-    color: whitesmoke;
-    opacity: .7;
-    transition: opacity 0.2s ease, color 0.2s ease;
+    color: $dark-white;
+    font-weight: $medium-weight;
+    opacity: 0.8;
+    padding: $spacing-sm $spacing-md;
+    border-radius: 6px;
+    transition: opacity 0.3s ease, color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
   }
+
   .nav-link {
     &:hover {
-      color: $white;
+      color: $link-hover-blue;
       opacity: 1;
+      background-color: rgba(138, 168, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    &:active, &:focus {
+      color: $link-active-blue;
+      background-color: rgba(138, 168, 255, 0.12);
     }
   }
 
@@ -38,8 +50,33 @@
   }
 
   .dropdown-menu {
-    background-color: #343a40;
+    background-color: rgba(27, 29, 37, 0.98);
     color: $dark-white;
+    border: 1px solid rgba(138, 168, 255, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: $spacing-sm;
+    margin-top: $spacing-sm;
+
+    .dropdown-item {
+      color: $dark-white;
+      padding: $spacing-sm $spacing-md;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+      &:hover {
+        background-color: rgba(138, 168, 255, 0.12);
+        color: $link-hover-blue;
+        transform: translateX(4px);
+      }
+
+      &:active, &:focus {
+        background-color: rgba(138, 168, 255, 0.18);
+        color: $link-active-blue;
+      }
+    }
   }
 
 

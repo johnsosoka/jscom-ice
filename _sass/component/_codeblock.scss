@@ -1,32 +1,63 @@
 pre.highlight, pre {
-  margin: 0px; // this helped partially resolve code block spacing in articles
+  margin: $spacing-lg 0;
   @include media-query($on-mobile) {
-    margin: 0 calc(51% - 51vw);
-    padding-left: 20px;
+    margin: $spacing-md calc(51% - 51vw);
+    padding-left: $spacing-md;
   }
-  border: 1px solid rgba(128,128,128,0.1);
+
+  // Enhanced visual styling
+  border: 1px solid rgba(138, 168, 255, 0.1);
   background-color: #1a1b21;
-  border-radius: 1px;
-  padding: 10px;
+  border-radius: 8px;
+  padding: $spacing-lg;
   display: block;
   overflow-x: auto;
 
+  // Subtle depth
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2),
+              inset 0 1px 0 rgba(255, 255, 255, 0.03);
+
+  // Smooth scrolling for overflow
+  scroll-behavior: smooth;
+
+  // Custom scrollbar for WebKit browsers
+  &::-webkit-scrollbar {
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(138, 168, 255, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(138, 168, 255, 0.5);
+    }
+  }
+
   > code {
+    font-family: $code-font-family;
     width: 100%;
     max-width: 50rem;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.5;
-    font-size: smaller;
+    line-height: 1.6;
+    font-size: $medium-font-size;
     display: block;
     border: 0;
+
+    // Enable font ligatures for JetBrains Mono
+    font-feature-settings: "liga" 1, "calt" 1;
+    -webkit-font-feature-settings: "liga" 1, "calt" 1;
   }
 }
 
 .highlight table td {
-  padding: 5px;
+  padding: $spacing-sm;
 }
 
 .highlight table pre {
   margin: 0;
+  box-shadow: none; // Remove shadow for table-based highlights
 }
