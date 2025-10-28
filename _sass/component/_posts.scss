@@ -29,10 +29,11 @@
   .post-item-title a {
     color: $smoke;
     //font-weight: bold;
+    transition: color 0.2s ease;
   }
 
   .post-item-title a:hover {
-    color: $darker-blue-grey
+    color: $darker-blue-grey;
   }
 }
 

@@ -1,17 +1,29 @@
 // Navbar
 .navbar {
   border-color: $dark-light;
-  position: relative;
+  // position: relative; // Removed - let Bootstrap's fixed-top handle positioning
 
   margin-right: auto;
   margin-left: auto;
   border-bottom: 1px solid $dark-smoke;
 
+  // Smooth transitions for all state changes
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-bottom 0.3s ease, padding 0.3s ease;
+
+  // Scrolled state - solid background with shadow
+  &.navbar-scrolled {
+    background-color: rgba(33, 37, 41, 0.98) !important; // Dark semi-transparent
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
 
   .nav-link:not(:last-child) {
     //font-size: 18px;
     color: whitesmoke;
     opacity: .7;
+    transition: opacity 0.2s ease, color 0.2s ease;
   }
   .nav-link {
     &:hover {

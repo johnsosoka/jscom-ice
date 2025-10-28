@@ -107,6 +107,9 @@ body {
   flex-direction: column;
   min-height: 100vh;
 
+  // Account for fixed navbar height
+  padding-top: 56px; // Standard Bootstrap navbar height
+
   img {
     width: 100%;
     height: auto;
@@ -154,6 +157,8 @@ body {
   a {
     // Link Colors
     color: $darker-text-link-blue;
+    transition: color 0.2s ease, opacity 0.2s ease;
+
     &:hover,
     &:active,
     &:focus {
