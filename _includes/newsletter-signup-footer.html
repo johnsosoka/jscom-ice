@@ -1,0 +1,78 @@
+{% if site.newsletter.footer.enabled %}
+<div class="newsletter-footer-signup">
+  <div class="newsletter-container">
+    <div class="newsletter-content">
+      <div class="newsletter-text">
+        <h5 class="newsletter-title">{{ site.newsletter.footer.title | default: "Stay Updated" }}</h5>
+        <p class="newsletter-description">{{ site.newsletter.footer.description | default: "Get notified about new blog posts and updates" }}</p>
+      </div>
+      <form id="newsletterFooterForm" class="newsletter-form">
+        <div id="newsletter-notification" class="alert mt-2" role="alert" style="display: none;"></div>
+        <div class="newsletter-input-group">
+          <input type="email"
+                 class="form-control newsletter-email-input"
+                 id="newsletter-email"
+                 name="newsletter_email"
+                 placeholder="Enter your email"
+                 required>
+          <button type="submit" class="btn btn-primary newsletter-submit-btn" id="newsletter-submit">
+            Subscribe
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/jquery-3.7.0.min.js"></script>
+<script>
+  function submitNewsletterFooter(email) {
+    $.ajax({
+      url: "{{ site.newsletter.api.url }}",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        email: email,
+        name: "Newsletter Subscriber"  // Default name for footer signups
+      }),
+      success: function(data) {
+        console.log(data);
+        $('#newsletter-notification')
+          .removeClass('alert-danger')
+          .addClass('alert-success')
+          .text('Successfully subscribed! Check your email.')
+          .show();
+        $('#newsletter-email').val('');
+      },
+      error: function(xhr) {
+        console.log("Error in the request:", xhr);
+        var errorMsg = 'Something went wrong. Please try again.';
+        if (xhr.responseJSON && xhr.responseJSON.error) {
+          errorMsg = xhr.responseJSON.error;
+        }
+        $('#newsletter-notification')
+          .removeClass('alert-success')
+          .addClass('alert-danger')
+          .text(errorMsg)
+          .show();
+      }
+    });
+  }
+
+  $('#newsletterFooterForm').on('submit', function(e) {
+    e.preventDefault();
+    var email = $('#newsletter-email').val().trim();
+
+    if (!email) {
+      $('#newsletter-notification')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text('Please enter a valid email address.')
+        .show();
+      return;
+    }
+
+    submitNewsletterFooter(email);
+  });
+</script>
+{% endif %}

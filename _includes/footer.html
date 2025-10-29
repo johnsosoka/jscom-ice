@@ -4,6 +4,7 @@
     <a class="mb-1 mx-2 footer_item" href="{{ link.url }}">{{ link.title }}</a>
     {% endfor %}
   </div>
+  {% include newsletter-signup-footer.html %}
   <small class="copyright-text">
     John Sosoka<br>
     &copy; {{site.site_est_year}} - {{ site.time | date: "%Y" }}
