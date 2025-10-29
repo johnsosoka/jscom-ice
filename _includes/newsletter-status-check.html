@@ -1,0 +1,133 @@
+<div class="newsletter-section">
+  <h2 class="newsletter-section-title">Check Subscription Status</h2>
+  <p class="newsletter-section-description">
+    Enter your email address to check your current newsletter subscription status.
+  </p>
+
+  <form id="newsletterStatusForm">
+    <div id="status-notification" class="alert mt-3" role="alert" style="display: none;"></div>
+
+    <div class="form-group">
+      <input type="email"
+             class="form-control"
+             id="status-email"
+             name="status_email"
+             placeholder="Email Address"
+             required>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary" id="status-submit">Check Status</button>
+    </div>
+  </form>
+
+  <div id="status-result" class="newsletter-status-result" style="display: none;">
+    <div class="status-row">
+      <span class="status-label">Email:</span>
+      <span class="status-value" id="result-email"></span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Status:</span>
+      <span class="status-value" id="result-status"></span>
+    </div>
+    <div class="status-row" id="subscribed-at-row" style="display: none;">
+      <span class="status-label">Subscribed On:</span>
+      <span class="status-value" id="result-subscribed-at"></span>
+    </div>
+    <div class="status-row" id="updated-at-row" style="display: none;">
+      <span class="status-label">Last Updated:</span>
+      <span class="status-value" id="result-updated-at"></span>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/js/jquery-3.7.0.min.js"></script>
+<script>
+  function checkNewsletterStatus(email) {
+    $.ajax({
+      url: "{{ site.newsletter.api.url }}/status?email=" + encodeURIComponent(email),
+      type: "GET",
+      success: function(data) {
+        console.log(data);
+        displayStatusResult(data);
+        $('#status-notification').hide();
+      },
+      error: function(xhr) {
+        console.log("Error in the request:", xhr);
+        var errorMsg = 'Something went wrong. Please try again.';
+        if (xhr.responseJSON && xhr.responseJSON.error) {
+          errorMsg = xhr.responseJSON.error;
+        }
+        $('#status-notification')
+          .removeClass('alert-success')
+          .addClass('alert-danger')
+          .text(errorMsg)
+          .show();
+        $('#status-result').hide();
+      }
+    });
+  }
+
+  function displayStatusResult(data) {
+    // Set email
+    $('#result-email').text(data.email);
+
+    // Set status with appropriate styling
+    var statusText = data.status.toUpperCase();
+    var statusElement = $('#result-status');
+    statusElement.removeClass('status-active status-inactive status-not-found');
+
+    if (data.status === 'active') {
+      statusElement.addClass('status-active').text(statusText);
+    } else if (data.status === 'inactive') {
+      statusElement.addClass('status-inactive').text(statusText);
+    } else {
+      statusElement.addClass('status-not-found').text(statusText);
+    }
+
+    // Show/hide timestamp rows based on data availability
+    if (data.subscribed_at) {
+      var subscribedDate = new Date(data.subscribed_at * 1000).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      $('#result-subscribed-at').text(subscribedDate);
+      $('#subscribed-at-row').show();
+    } else {
+      $('#subscribed-at-row').hide();
+    }
+
+    if (data.updated_at) {
+      var updatedDate = new Date(data.updated_at * 1000).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      $('#result-updated-at').text(updatedDate);
+      $('#updated-at-row').show();
+    } else {
+      $('#updated-at-row').hide();
+    }
+
+    // Show the result container
+    $('#status-result').show();
+  }
+
+  $('#newsletterStatusForm').on('submit', function(e) {
+    e.preventDefault();
+    var email = $('#status-email').val().trim();
+
+    if (!email) {
+      $('#status-notification')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text('Please enter a valid email address.')
+        .show();
+      $('#status-result').hide();
+      return;
+    }
+
+    checkNewsletterStatus(email);
+  });
+</script>

@@ -1,0 +1,79 @@
+<div class="newsletter-section">
+  <h2 class="newsletter-section-title">Unsubscribe from Newsletter</h2>
+  <p class="newsletter-section-description">
+    Sorry to see you go! Enter your email address below to unsubscribe from the newsletter.
+    You can always re-subscribe at any time.
+  </p>
+
+  <form id="newsletterUnsubscribeForm">
+    <div id="unsubscribe-notification" class="alert mt-3" role="alert" style="display: none;"></div>
+
+    <div class="form-group">
+      <input type="email"
+             class="form-control"
+             id="unsubscribe-email"
+             name="unsubscribe_email"
+             placeholder="Email Address"
+             required>
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-secondary" id="unsubscribe-submit">Unsubscribe from Newsletter</button>
+    </div>
+  </form>
+</div>
+
+<script src="/assets/js/jquery-3.7.0.min.js"></script>
+<script>
+  function submitNewsletterUnsubscribe(email) {
+    $.ajax({
+      url: "{{ site.newsletter.api.url }}",
+      type: "DELETE",
+      contentType: "application/json",
+      data: JSON.stringify({
+        email: email
+      }),
+      success: function(data) {
+        console.log(data);
+        $('#unsubscribe-notification')
+          .removeClass('alert-danger')
+          .addClass('alert-success')
+          .text('Successfully unsubscribed. You will no longer receive our newsletter.')
+          .show();
+        clearUnsubscribeForm();
+      },
+      error: function(xhr) {
+        console.log("Error in the request:", xhr);
+        var errorMsg = 'Something went wrong. Please try again.';
+        if (xhr.responseJSON && xhr.responseJSON.error) {
+          errorMsg = xhr.responseJSON.error;
+        }
+        $('#unsubscribe-notification')
+          .removeClass('alert-success')
+          .addClass('alert-danger')
+          .text(errorMsg)
+          .show();
+      }
+    });
+  }
+
+  function clearUnsubscribeForm() {
+    $('#unsubscribe-email').val('');
+  }
+
+  $('#newsletterUnsubscribeForm').on('submit', function(e) {
+    e.preventDefault();
+    var email = $('#unsubscribe-email').val().trim();
+
+    if (!email) {
+      $('#unsubscribe-notification')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text('Please enter a valid email address.')
+        .show();
+      return;
+    }
+
+    submitNewsletterUnsubscribe(email);
+  });
+</script>

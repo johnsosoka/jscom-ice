@@ -1,0 +1,90 @@
+<div class="newsletter-section">
+  <h2 class="newsletter-section-title">Subscribe to Newsletter</h2>
+  <p class="newsletter-section-description">
+    Enter your email address to receive updates about new blog posts, projects, and announcements.
+    We respect your privacy and will never share your email address.
+  </p>
+
+  <form id="newsletterSubscribeForm">
+    <div id="subscribe-notification" class="alert mt-3" role="alert" style="display: none;"></div>
+
+    <div class="form-group">
+      <input type="email"
+             class="form-control"
+             id="subscribe-email"
+             name="subscribe_email"
+             placeholder="Email Address"
+             required>
+    </div>
+
+    <div class="form-group">
+      <input type="text"
+             class="form-control"
+             id="subscribe-name"
+             name="subscribe_name"
+             placeholder="Name (Optional)">
+    </div>
+
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-primary" id="subscribe-submit">Subscribe to Newsletter</button>
+    </div>
+  </form>
+</div>
+
+<script src="/assets/js/jquery-3.7.0.min.js"></script>
+<script>
+  function submitNewsletterSubscribe(email, name) {
+    $.ajax({
+      url: "{{ site.newsletter.api.url }}",
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        email: email,
+        name: name || "Newsletter Subscriber"
+      }),
+      success: function(data) {
+        console.log(data);
+        $('#subscribe-notification')
+          .removeClass('alert-danger')
+          .addClass('alert-success')
+          .text('Successfully subscribed! You will receive a confirmation shortly.')
+          .show();
+        clearSubscribeForm();
+      },
+      error: function(xhr) {
+        console.log("Error in the request:", xhr);
+        var errorMsg = 'Something went wrong. Please try again.';
+        if (xhr.responseJSON && xhr.responseJSON.error) {
+          errorMsg = xhr.responseJSON.error;
+        }
+        $('#subscribe-notification')
+          .removeClass('alert-success')
+          .addClass('alert-danger')
+          .text(errorMsg)
+          .show();
+      }
+    });
+  }
+
+  function clearSubscribeForm() {
+    $('#subscribe-email').val('');
+    $('#subscribe-name').val('');
+  }
+
+  $('#newsletterSubscribeForm').on('submit', function(e) {
+    e.preventDefault();
+    var email = $('#subscribe-email').val().trim();
+    var name = $('#subscribe-name').val().trim();
+
+    if (!email) {
+      $('#subscribe-notification')
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .text('Please enter a valid email address.')
+        .show();
+      return;
+    }
+
+    submitNewsletterSubscribe(email, name);
+  });
+</script>
