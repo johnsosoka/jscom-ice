@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "jscom_ice"
-  spec.version       = "1.1.0"
+  spec.version       = "1.2.0"
   spec.authors       = ["John Sosoka"]
   spec.email         = ["code@johnsosoka.com"]
 
